@@ -1,2 +1,2 @@
-# XStates
-Showing the states of selected country
+# XLogin
+Login Page
