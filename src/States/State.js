@@ -3,7 +3,7 @@ import "./State.css";
 
 const State = () => {
   const [data, setData] = useState({
-    countries: [],
+    countries: ["Selected Country"],
     state: [],
     city: [],
   });
@@ -74,21 +74,49 @@ const State = () => {
       <h2>Select Location</h2>
       <div className='state_wrapper'>
         <div>
-          <select name='country' onChange={handleChange} className='country'>
+          <select
+            name='country'
+            onChange={handleChange}
+            className='country'
+            required
+          >
+            <option value='0' selected>
+              Select Country
+            </option>
             {data.countries.map((item) => (
               <option value={item} key={item}>
                 {item}
               </option>
             ))}
           </select>
-          <select name='state' onChange={handleChange} className='state'>
+          <select
+            name='state'
+            // value={isSelected.country}
+            onChange={handleChange}
+            className='state'
+            required
+            disabled={isSelected.country === ""}
+          >
+            <option value='0' selected>
+              Select State
+            </option>
             {data.state.map((item) => (
               <option value={item} key={item}>
                 {item}
               </option>
             ))}
           </select>
-          <select name='city' onChange={handleChange} className='city'>
+          <select
+            name='city'
+            onChange={handleChange}
+            // value={isSelected.city}
+            className='city'
+            required
+            disabled={isSelected.state === ""}
+          >
+            <option value='0' selected>
+              Select City
+            </option>
             {data.city.map((item) => (
               <option value={item} key={item}>
                 {item}
