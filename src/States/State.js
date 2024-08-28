@@ -13,26 +13,38 @@ const State = () => {
     city: "",
   });
   const fetchCountry = async () => {
-    const res = await fetch(
-      "https://crio-location-selector.onrender.com/countries"
-    );
-    const jsonData = await res.json();
-    setData({ ...data, countries: jsonData });
+    try {
+      const res = await fetch(
+        "https://crio-location-selector.onrender.com/countries"
+      );
+      const jsonData = await res.json();
+      setData({ ...data, countries: jsonData });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleFetch = async (name, value) => {
     console.log(name, value);
     if (name === "country" && value) {
-      const res = await fetch(
-        `https://crio-location-selector.onrender.com/country=${value}/states`
-      );
-      const jsonData = await res.json();
-      setData({ ...data, state: jsonData });
+      try {
+        const res = await fetch(
+          `https://crio-location-selector.onrender.com/country=${value}/states`
+        );
+        const jsonData = await res.json();
+        setData({ ...data, state: jsonData });
+      } catch (error) {
+        console.log(error);
+      }
     } else if (name === "state" && value) {
-      const res = await fetch(
-        `https://crio-location-selector.onrender.com/country=${isSelected.country}/state=${value}/cities`
-      );
-      const jsonData = await res.json();
-      setData({ ...data, city: jsonData });
+      try {
+        const res = await fetch(
+          `https://crio-location-selector.onrender.com/country=${isSelected.country}/state=${value}/cities`
+        );
+        const jsonData = await res.json();
+        setData({ ...data, city: jsonData });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const handleChange = (e) => {
@@ -49,34 +61,36 @@ const State = () => {
     <div className='state_container'>
       <h2>Select Location</h2>
       <div className='state_wrapper'>
-        <select name='country' onChange={handleChange} className='country'>
-          {data.countries.map((item) => (
-            <option value={item} key={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-        <select name='state' onChange={handleChange} className='state'>
-          {data.state.map((item) => (
-            <option value={item} key={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-        <select name='city' onChange={handleChange} className='city'>
-          {data.city.map((item) => (
-            <option value={item} key={item}>
-              {item}
-            </option>
-          ))}
-        </select>
+        <div>
+          <select name='country' onChange={handleChange} className='country'>
+            {data.countries.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <select name='state' onChange={handleChange} className='state'>
+            {data.state.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <select name='city' onChange={handleChange} className='city'>
+            {data.city.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+        {isSelected.city && isSelected.country && isSelected.state && (
+          <p>
+            <b>You selected {isSelected.city}</b>,{isSelected.state},
+            {isSelected.country}
+          </p>
+        )}
       </div>
-      {isSelected.city && isSelected.country && isSelected.state && (
-        <p>
-          <b>You selected {isSelected.city}</b>,{isSelected.state},
-          {isSelected.country}
-        </p>
-      )}
     </div>
   );
 };

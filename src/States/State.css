@@ -10,8 +10,13 @@
   width: 100%;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  div:nth-child(1) {
+    display: flex;
+    gap: 10px;
+  }
   gap: 15px;
 }
 .country {
