@@ -19,8 +19,12 @@ const State = () => {
       );
       const jsonData = await res.json();
       setData({ ...data, countries: jsonData });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (err.response && err.response.status === 500) {
+        console.log("Internal Server Error");
+      } else {
+        console.log("An error occurred");
+      }
     }
   };
   const handleFetch = async (name, value) => {
@@ -32,8 +36,12 @@ const State = () => {
         );
         const jsonData = await res.json();
         setData({ ...data, state: jsonData });
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        if (err.response && err.response.status === 500) {
+          console.log("Internal Server Error");
+        } else {
+          console.log("An error occurred");
+        }
       }
     } else if (name === "state" && value) {
       try {
@@ -42,8 +50,12 @@ const State = () => {
         );
         const jsonData = await res.json();
         setData({ ...data, city: jsonData });
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        if (err.response && err.response.status === 500) {
+          console.log("Internal Server Error");
+        } else {
+          console.log("An error occurred");
+        }
       }
     }
   };
@@ -86,7 +98,7 @@ const State = () => {
         </div>
         {isSelected.city && isSelected.country && isSelected.state && (
           <p>
-            <b>You selected {isSelected.city}</b>,{isSelected.state},
+            <b>You selected {isSelected.city}</b>, {isSelected.state},&nbsp;
             {isSelected.country}
           </p>
         )}
