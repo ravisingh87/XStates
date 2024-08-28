@@ -1,0 +1,36 @@
+.state_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.state_wrapper {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.country {
+  max-width: 20rem;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.state {
+  width: 10rem;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.city {
+  width: 5rem;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
+}
